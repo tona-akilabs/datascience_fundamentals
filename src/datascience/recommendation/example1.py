@@ -37,5 +37,6 @@ def recommend(user, matrix, similarity_df, top_n=2):
     return sorted(recommendations.items(), key=lambda x: x[1], reverse=True)[:top_n]
 
 print(recommend("A", matrix, similarity_df))
+print(recommend("B", matrix, similarity_df))
 print(recommend("C", matrix, similarity_df))
 print(recommend("D", matrix, similarity_df))
