@@ -3,14 +3,14 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # Load data
 data = pd.DataFrame({
-    "user": ["A", "A", "B", "B", "C"],
-    "item": ["Book", "Pen", "Book", "Laptop", "Pen"],
-    "rating": [5, 3, 4, 5, 4]
+    "user": ["A", "A", "B", "B", "C", "C", "D"],
+    "item": ["Book", "Pen", "Book", "Laptop", "Book", "Laptop", "Pen"],
+    "rating": [5, 3, 4, 5, 9, 7, 8]
 })
 
 # Pivot table
 matrix = data.pivot_table(index="user", columns="item", values="rating").fillna(0)
-
+print(matrix)
 # Similarity
 similarity = cosine_similarity(matrix)
 
@@ -21,7 +21,7 @@ similarity_df = pd.DataFrame(
     index=matrix.index,
     columns=matrix.index
 )
-#print(similarity_df)
+print(similarity_df)
 
 
 def recommend(user, matrix, similarity_df, top_n=2):
@@ -37,3 +37,5 @@ def recommend(user, matrix, similarity_df, top_n=2):
     return sorted(recommendations.items(), key=lambda x: x[1], reverse=True)[:top_n]
 
 print(recommend("A", matrix, similarity_df))
+print(recommend("C", matrix, similarity_df))
+print(recommend("D", matrix, similarity_df))
